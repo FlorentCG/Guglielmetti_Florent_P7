@@ -1,0 +1,7 @@
+@import "styles";
+.onLike {
+    color: lighten($main-color, 30%) !important;
+}
+.onDislike {
+    color: darken($accent-color, 10%) !important;
+}

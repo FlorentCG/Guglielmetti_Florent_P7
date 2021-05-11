@@ -1,0 +1,79 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<div class="container-login">
+
+    <form
+        class="container-login__login-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="onLogin()"
+        *ngIf="!loading"
+    >
+        <div class="container-login__login-form__container-fluid">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Entrez votre mail</mat-label>
+                <input
+                    matInput
+                    placeholder="pat@example.com"
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                    required
+                >
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-error *ngIf="loginForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Entrez votre mot de passe</mat-label>
+                <input
+                    matInput
+                    [type]="hide ? 'text' : 'password'"
+                    class="form-control"
+                    id="password"
+                    formControlName="password"
+                    required
+                >
+                <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="hide = !hide;$event.preventDefault()"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide"
+                >
+                    <mat-icon>
+                        {{hide ? 'visibility' : 'visibility_off'}}
+                    </mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button
+                aria-label="submit logins & connect"
+                class="btn--lg"
+                mat-raised-button
+                type="submit"
+                [disabled]="loginForm.invalid"
+            >
+                Login
+            </button>
+            <p
+                class="text-danger"
+                *ngIf="errorMsg"
+            >
+                {{ errorMsg }}
+            </p>
+            
+            <button
+                mat-raised-button
+                aria-label="open signin form"
+                class="btn--mid"
+                (click)="onOpenDialog();$event.preventDefault()"
+            >
+               Créer un compte
+            </button>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,116 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<form
+    [formGroup]="signupForm"
+    *ngIf="!loading"
+>
+    <button
+        aria-label="close signup window"
+        class="cross"
+        mat-flat-button
+        mat-dialog-close
+        title="close"
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+    <div class="container-fluid">
+
+        <mat-form-field
+            class="form-group"
+            appearance="outline"
+        >
+            <mat-label for="firstName">Entrez votre prénom</mat-label>
+            <input
+                matInput
+                placeholder="Bill"
+                id="firstName"
+                class="form-control"
+                formControlName="firstname"
+                required
+            >
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field
+            class="form-group"
+            appearance="outline"
+        >
+            <mat-label for="lastName">Entrez votre nom</mat-label>
+            <input
+                matInput
+                placeholder="Gates"
+                id="lastName"
+                class="form-control"
+                formControlName="lastname"
+                required
+            >
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field
+            class="form-group"
+            appearance="outline"
+        >
+            <mat-label for="email">Entrez votre mail</mat-label>
+            <input
+                aria-label="email input"
+                matInput
+                placeholder="pat@example.com"
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                required
+            >
+            <mat-icon matSuffix>alternate_email</mat-icon>
+            <mat-error *ngIf="signupForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+            class="form-group"
+            appearance="outline"
+        >
+            <mat-label for="password">Entrez votre mot de passe</mat-label>
+            <input
+                matInput
+                aria-label="password input"
+                [type]="hide ? 'text' : 'password'"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                required
+            >
+            <button
+                class="btn"
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide;$event.preventDefault()"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+            >
+                <mat-icon>
+                    {{hide ? 'visibility' : 'visibility_off'}}
+                </mat-icon>
+            </button>
+        </mat-form-field>
+
+    </div>
+    <mat-dialog-actions>
+        <button
+            aria-label="submit signup form"
+            [mat-dialog-close]="onSignup()"
+            mat-raised-button
+            color="primary"
+            class="btn btn-primary"
+            [disabled]="signupForm.invalid"
+        >
+            SIGN UP
+        </button>
+    </mat-dialog-actions>
+
+    <p
+        class="text-danger"
+        *ngIf="errorMsg"
+    >
+        {{ errorMsg }}
+    </p>
+</form>

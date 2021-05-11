@@ -1,0 +1,13 @@
+<div
+    class="container"
+    *ngIf="userService.currentUser$ | async as user"
+>
+    
+    <div
+        *ngIf="!user.admin"
+        class="container__admin"
+    >
+        <h2 class="container__admin__title">Admin</h2>
+       
+    </div>
+</div>

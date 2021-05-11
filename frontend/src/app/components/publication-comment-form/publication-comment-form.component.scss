@@ -1,0 +1,107 @@
+@import "variables";
+.comment-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+
+    &__first-container {
+        display: grid;
+        grid-template-columns: 1fr 12fr;
+        align-items: flex-start;
+
+        &__link {
+            columns: 1;
+        }
+        &__edit {
+            columns: 2;
+            display: flex;
+            align-items: center;
+            margin: auto;
+            width: 100%;
+            padding-left: 2%;
+
+            &__form-group {
+                position: relative;
+                background-color: $bg-color;
+                border-radius: 40px;
+                padding: 8px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex-wrap: wrap;
+                width: 100%;
+                z-index: 10;
+
+                &__input-text {
+                    max-width: 610px;
+                    flex-grow: 1;
+                    outline: unset;
+                    padding-left: 6px;
+                    margin: auto;
+                }
+                &__fake-placeholder {
+                    position: absolute;
+                    z-index: -1;
+                    left: 13px;
+                }
+                &__buttons {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+    &__seconde-container {
+        display: flex;
+        align-items: flex-start;
+
+        &__preview-image {
+            max-height: 100px;
+            display: block;
+            margin-top: 10px;
+            margin-left: 70px;
+        }
+        &__btn-canceled {
+            cursor: pointer;
+            outline: none;
+            border: none;
+            margin: 10px 0 0 10px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+
+            &__icon {
+                position: absolute;
+                margin-top: -12px;
+                margin-left: -12px;
+            }
+        }
+    }
+    &__cancel-handler {
+        margin-left: 70px;
+
+        &__trigger {
+            color: $main-color;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+.mat-button--custom {
+    min-width: unset;
+    line-height: unset;
+    padding: unset;
+    margin-right: 10px;
+}
+
+.mat-icon--custom {
+    color: $mat-icon-image-comment;
+    &:hover {
+        color: $mat-icon-image-comment-hover;
+    }
+}
+.display-none {
+    display: none;
+}

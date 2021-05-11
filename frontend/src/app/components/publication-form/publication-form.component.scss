@@ -1,0 +1,51 @@
+@import "styles";
+
+.publication-form {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  position: relative;
+  min-width: 320px;
+  width: 25vw;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+.mat-flat-button--custom {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: unset;
+}
+
+.display-none {
+  display: none;
+}
+
+.mat-button--color {
+  color: $mat-button-publication;
+}
+
+.mat-icon--color {
+  color: $mat-icon-image;
+}
+
+.mat-raised-button--mid {
+  width: 50%;
+  margin: auto;
+}
+
+@media (max-width: 500px) {
+  form {
+    position: relative;
+    min-width: 80vw;
+    padding: 8px;
+    flex-grow: 1;
+    margin: auto;
+  }
+
+  ::ng-deep .cdk-overlay-pane {
+    flex-grow: 1 !important;
+    max-width: unset !important;
+  }
+}

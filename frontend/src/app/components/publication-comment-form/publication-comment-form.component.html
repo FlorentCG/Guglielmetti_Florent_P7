@@ -1,0 +1,129 @@
+<form
+    class="comment-form"
+    *ngIf="userService.currentUser$ | async as user"
+    [formGroup]="commentForm"
+    (ngSubmit)="onSubmit()"
+>
+
+    <!-- first line -->
+    <div class="comment-form__first-container">
+        <!-- thumbmail + link to profile -->
+        <a
+            class="comment-form__first-container__link"
+            routerLink="../profile"
+        >
+            <img
+                class="comment-form__first-container__link__thumbmail"
+                *ngIf="user.media"
+                mat-card-avatar
+                title="go to your profile"
+                [src]="user.media"
+                alt=" thumbmail from {{user.firstname}}"
+            >
+            <img
+                class="comment-form__first-container__link__thumbmail"
+                *ngIf="!user.media"
+                mat-card-avatar
+                title="go to your profile"
+                src="../../../assets/logos/Profile_avatar_placeholder_large.png"
+                alt=" default thumbmail"
+            >
+        </a>
+        <!-- comment text part -->
+        <div class="comment-form__first-container__edit">
+
+            <div class="comment-form__first-container__edit__form-group">
+                <!-- div in input style -->
+                <div
+                    class="comment-form__first-container__edit__form-group__input-text"
+                    contenteditable="true"
+                    (input)="onContentChange($event.target.textContent)"
+                    name="text"
+                    type="text"
+                >
+                    {{preloadData ? preloadData : ""}}
+                </div>
+                <!-- fake placeholder -->
+                <span
+                    class="comment-form__first-container__edit__form-group__fake-placeholder"
+                    [ngClass]="{'display-none': commentForm.get('body').value }"
+                >
+                    Ecrire un commentaire...
+                </span>
+                <!-- action part -->
+                <div class="comment-form__first-container__edit__form-group__buttons">
+                    <!-- trigger media event -->
+                    <button
+                        class="mat-button--custom"
+                        mat-button
+                        (click)="fileInput.click();$event.preventDefault()"
+                    >
+                        <mat-icon class="mat-icon--custom">camera_alt</mat-icon>
+                    </button>
+                    <!-- submit comment -->
+                    <button
+                        [disabled]="commentForm.invalid"
+                        class="mat-button--custom"
+                        mat-button
+                        (click)="onSubmit();$event.preventDefault()"
+                    >
+                        <mat-icon
+                            class="mat-icon--custom"
+                            [ngClass]="{'display-none': commentForm.invalid}"
+                        >
+                            Envoyer
+                        </mat-icon>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- second part -->
+    <div class="comment-form__seconde-container">
+        <!-- image preview -->
+        <img
+            class="comment-form__seconde-container__preview-image"
+            [src]="imagePreview"
+            *ngIf="imagePreview"
+        >
+        <!-- delete image -->
+        <button
+            class="comment-form__seconde-container__btn-canceled"
+            (click)="onDeleteImage();$event.preventDefault()"
+            *ngIf="imagePreview"
+        >
+            <mat-icon class="comment-form__seconde-container__btn-canceled__icon">close</mat-icon>
+        </button>
+        <!-- hide media input -->
+        <input
+            aria-label="media upload"
+            class='comment-form__seconde-container__input-switch-image display-none'
+            type="file"
+            accept="image/*"
+            #imageInput
+            (change)="onFileAdded($event);$event.preventDefault()"
+            #fileInput
+            required
+        >
+    </div>
+
+    <!-- canceled modification -->
+    <span
+        class="comment-form__cancel-handler"
+        *ngIf="currentComment"
+        (click)="onModifyCanceled($event)"
+    >
+        Cliquez ici
+        <span class="comment-form__cancel-handler__trigger">supprimer</span>
+    </span>
+
+    <!-- display error message -->
+    <p
+        class="text-danger"
+        *ngIf="errorMsg"
+    >
+        {{ errorMsg }}
+    </p>
+</form>
