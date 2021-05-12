@@ -7,12 +7,7 @@ const commentSchema = Joi.object({
         .min(1)
         .max(1000)
         .required(),
-    /* 
-        id_publication: Joi.number()
-            .min(1),
-    
-        actor_publication: Joi.number()
-            .min(1) */
+   
 
 });
 
