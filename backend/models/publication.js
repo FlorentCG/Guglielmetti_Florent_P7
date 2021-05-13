@@ -15,7 +15,7 @@ return sequelize.define('publication', {
     },
     body: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     media: {
       type: DataTypes.STRING(255),
